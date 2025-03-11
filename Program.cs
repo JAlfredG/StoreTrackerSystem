@@ -8,6 +8,7 @@
             string userName, password;
             bool loginLoop = false, optionLoop = false;
             char opt;
+            string dlyRep = "No current report", updDlyRep;
 
             Console.WriteLine("Welcome to Store Tracker");
 
@@ -23,7 +24,7 @@
                 //check if username and password are correct
                 if (userName == "admin" && password == "admin")
                 {
-                    Console.WriteLine("Login Successful");
+                    Console.WriteLine("Login Successful!\n");
 
                     //loop the option
                     while (!optionLoop)
@@ -49,6 +50,10 @@
                                 break;
                             case '2':
                                 Console.WriteLine("Update Inventory");
+                                //show options for inventory; 1 frame - scroll pane - add/remove item - textfield
+                                
+
+
                                 /*
                                 add item
                                 remove item
@@ -56,11 +61,14 @@
                                  */
                                 break;
                             case '3':
-                                Console.WriteLine("View Last Daily Report");
+                                updDlyRep = dlyRep;
+                                Console.WriteLine($"Last Daily Report: {updDlyRep}");
                                 //show the last daily report
                                 break;
                             case '4':
-                                Console.WriteLine("Create Daily Report");
+                                Console.WriteLine("Create Daily Report: ");
+                                dlyRep = Console.ReadLine();
+                                Console.WriteLine("Report Updated.");
                                 //create a daily report for that day
                                 break;
                             case '5':
@@ -69,6 +77,7 @@
                                 break;
                             case '6':
                                 Console.WriteLine("Create Earning Report");
+                                //1 frame - textfields for earnings, profit (money update)
                                 //create an earning report which includes earnings, lost, and profit
                                 break;
                             case '7':
@@ -79,6 +88,7 @@
                                 Console.WriteLine("Invalid Option");
                                 break;
                         }
+                        Console.WriteLine();
                     }
                     loginLoop = true;
                 }
