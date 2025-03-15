@@ -10,6 +10,7 @@
             //local variables
             string userName, password;
             bool loginLoop = false;
+            short loginAttempts = 0;
             
             Console.WriteLine("Welcome to Store Tracker");
 
@@ -65,6 +66,7 @@
                                 break;
                             case 7:
                                 //exit the program
+                                Console.WriteLine("Thank you for using our program!");
                                 break;
                             default:
                                 Console.WriteLine("Invalid Option");
@@ -76,7 +78,15 @@
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Username or Password");
+                    Console.WriteLine("Invalid Username or Password.");
+                    loginAttempts++;
+
+                    if (loginAttempts == 5)
+                    {
+                        Console.WriteLine("Too many attempts. Please try again later.");
+                        loginAttempts = 0;
+                        loginLoop = true;
+                    }
                 }
             }                       
         }
