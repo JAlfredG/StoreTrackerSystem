@@ -37,17 +37,10 @@
                         switch (systemOption)
                         {
                             case 1:
-                                Console.WriteLine("View Inventory"); //view current inventory
+                                Inventory(1);
                                 break;
                             case 2:
-                                Console.WriteLine("Update Inventory");
-                                //show options for inventory; 1 frame - scroll pane - add/remove item - textfield
-
-                                /*
-                                add item
-                                remove item
-                                update quantity of each item
-                                 */
+                                Inventory(2);
                                 break;
                             case 3:
                                 DailyReport(3); //show the last daily report
@@ -127,5 +120,27 @@
             }
 
         }
+
+        static void Inventory(byte userChoice)
+        {
+            if (userChoice == 1)
+            {
+                Console.WriteLine("Show Inventory");
+                //View list of inventory
+            }
+
+            if (userChoice == 2)
+            {
+                Console.WriteLine("Update Inventory:");
+                //show the list of inventory in array form
+                Console.Write("""
+                    [1] Add Item
+                    [2] Remove Item
+                    """);
+            }
+        }
+
+
+
     }   
 }
