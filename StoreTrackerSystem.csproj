@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="STSBusinessDataLogic\**" />
+    <EmbeddedResource Remove="STSBusinessDataLogic\**" />
+    <None Remove="STSBusinessDataLogic\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="STSBusinessDataLogic\STSBusinessDataLogic.csproj" />
+  </ItemGroup>
+
 </Project>

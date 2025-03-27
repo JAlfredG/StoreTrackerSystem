@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreTrackerSystem", "StoreTrackerSystem.csproj", "{F485A9DA-A661-4FD3-A162-5D65CB4993DA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STSBusinessDataLogic", "STSBusinessDataLogic\STSBusinessDataLogic.csproj", "{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F485A9DA-A661-4FD3-A162-5D65CB4993DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F485A9DA-A661-4FD3-A162-5D65CB4993DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F485A9DA-A661-4FD3-A162-5D65CB4993DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
