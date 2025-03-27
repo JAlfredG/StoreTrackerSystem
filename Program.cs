@@ -9,9 +9,9 @@
         static void Main(string[] args)
         {
             //local variables
-            string userName, password;
             bool loginLoop = false;
             short loginAttempts = 0;
+            string userName, password;
             
             Console.WriteLine("Welcome to Store Tracker!");
 
