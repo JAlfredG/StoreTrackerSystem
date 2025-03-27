@@ -3,8 +3,9 @@
     internal class Program
     {
         //global variables
-        static byte systemOption;
-        static string dailyReport = "No current report", updateDailyReport;
+        static byte systemOption, inventoryOption;
+        static string dailyReport = null, earningsReport = null, updateDailyReport, updateEarningsReport, inventoryItem;
+        static List<string> inventory = new List<string>();
         static void Main(string[] args)
         {
             //local variables
@@ -37,10 +38,10 @@
                         switch (systemOption)
                         {
                             case 1:
-                                Inventory(1);
+                                Inventory(1); //view inventory
                                 break;
                             case 2:
-                                Inventory(2);
+                                Inventory(2); //update inventory
                                 break;
                             case 3:
                                 DailyReport(3); //show the last daily report
@@ -49,13 +50,12 @@
                                 DailyReport(4); //create a daily report for that day
                                 break;
                             case 5:
-                                Console.WriteLine("View Last Earning Report");
-                                //show the last earning report
+                                EarningReport(5); //show the last earning report
                                 break;
                             case 6:
-                                Console.WriteLine("Create Earning Report");
-                                //1 frame - textfields for earnings, profit (money update)
-                                //create an earning report which includes earnings, lost, and profit
+                                EarningReport(6);
+                                //1 frame - textfields for earnings, earningsReport (money update)
+                                //create an earning report which includes earnings, lost, and earningsReport
                                 break;
                             case 7:
                                 //exit the program
@@ -104,8 +104,15 @@
         {
             if(userChoice == 3)
             {
-                updateDailyReport = dailyReport;
-                Console.WriteLine($"Last Daily Report: {updateDailyReport}");
+                if(dailyReport==null){
+                    Console.WriteLine("No current report.");
+                }
+                else
+                {
+                    updateDailyReport = dailyReport;
+                    Console.WriteLine($"Last Daily Report: {updateDailyReport}");
+                }
+                
             }
             else if (userChoice == 4)
             {
@@ -125,22 +132,117 @@
         {
             if (userChoice == 1)
             {
-                Console.WriteLine("Show Inventory");
-                //View list of inventory
+                if (inventory.Count!=0)
+                {
+                    Console.WriteLine("Current Inventory:");
+                    foreach (string items in inventory)
+                    {
+                        Console.WriteLine("\t" + items);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Inventory is empty.");
+                }
+
             }
 
             if (userChoice == 2)
             {
-                Console.WriteLine("Update Inventory:");
+                string itemRemove;
+                bool itemMatch;
+
+                Console.WriteLine("\nUpdate Inventory:");
                 //show the list of inventory in array form
                 Console.Write("""
                     [1] Add Item
                     [2] Remove Item
+                    UserInput: 
                     """);
+                inventoryOption = Convert.ToByte(Console.ReadLine());
+
+                if (inventoryOption == 1)
+                {
+                    Console.Write("Add Item to Inventory: ");
+                    inventoryItem = Console.ReadLine();
+                    inventory.Add(inventoryItem);
+                    Console.WriteLine("Current Invetory: ");
+                    foreach (string items in inventory)
+                    {
+                        Console.WriteLine("\t" + items);
+                    }
+                }
+                else if (inventoryOption == 2)
+                {
+                    if (inventory.Count != 0)
+                    {
+                        Console.WriteLine("Current Inventory: ");
+                        foreach (string items in inventory)
+                        {
+                            Console.WriteLine("\t" + items);
+                        }
+                        
+                        Console.Write("Item name to be removed: ");
+                        itemRemove = Console.ReadLine();
+
+                        itemMatch = inventory.Contains(itemRemove);
+
+                        if (itemMatch == true)
+                        {
+                            Console.WriteLine($"\n'{itemRemove}' removed from the inventory.");
+                            inventory.Remove(itemRemove);
+
+                            Console.WriteLine("Current Inventory: ");
+                            foreach (string items in inventory)
+                            {
+                                Console.WriteLine("\t" + items);
+                            }
+                            Console.WriteLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Either item name is invalid or item does not exist on the list.");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Inventory is empty.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option.");
+                }
             }
         }
 
+        static void EarningReport(byte userChoice)
+        {
+            if(userChoice == 5)
+            {
+                if (earningsReport == null)
+                {
+                    Console.WriteLine("No current report.");
+                }
+                else
+                {
+                    updateEarningsReport = earningsReport;
+                    Console.WriteLine($"Last Earnings Report: {updateEarningsReport}");
+                }
+            }
 
+            else if (userChoice == 6)
+            {
+                Console.Write("Create Earnings Report: ");
+                dailyReport = Console.ReadLine();
+                Console.WriteLine("Report Updated.");
+                Console.WriteLine($"Last Earnings Report: {earningsReport}");
+            }
+            else
+            {
+                Console.WriteLine("Invalid option.");
+            }
+        }
 
     }   
 }
