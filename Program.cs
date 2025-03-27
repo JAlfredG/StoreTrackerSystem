@@ -13,7 +13,7 @@
             bool loginLoop = false;
             short loginAttempts = 0;
             
-            Console.WriteLine("Welcome to Store Tracker");
+            Console.WriteLine("Welcome to Store Tracker!");
 
             //loop until login is successful
             while (!loginLoop)
@@ -32,7 +32,7 @@
                     //show options/functions on loop
                     do
                     {
-                        ShowOptions();
+                        ShowSystemOptions();
 
                         //function depending on choice made
                         switch (systemOption)
@@ -53,9 +53,7 @@
                                 EarningReport(5); //show the last earning report
                                 break;
                             case 6:
-                                EarningReport(6);
-                                //1 frame - textfields for earnings, earningsReport (money update)
-                                //create an earning report which includes earnings, lost, and earningsReport
+                                EarningReport(6); //create earnings report
                                 break;
                             case 7:
                                 //exit the program
@@ -84,7 +82,7 @@
             }                       
         }
 
-        static void ShowOptions()
+        static void ShowSystemOptions()
         {
             //show options
             Console.Write("""
@@ -100,34 +98,6 @@
             systemOption = Convert.ToByte(Console.ReadLine());
         }
 
-        static void DailyReport(byte userChoice)
-        {
-            if(userChoice == 3)
-            {
-                if(dailyReport==null){
-                    Console.WriteLine("No current report.");
-                }
-                else
-                {
-                    updateDailyReport = dailyReport;
-                    Console.WriteLine($"Last Daily Report: {updateDailyReport}");
-                }
-                
-            }
-            else if (userChoice == 4)
-            {
-                Console.Write("Create Daily Report: ");
-                dailyReport = Console.ReadLine();
-                Console.WriteLine("Report Updated.");
-                Console.WriteLine($"Last Daily Report: {dailyReport}");
-            }
-            else
-            {
-                Console.WriteLine("Invalid Input.");
-            }
-
-        }
-
         static void Inventory(byte userChoice)
         {
             if (userChoice == 1)
@@ -135,10 +105,7 @@
                 if (inventory.Count!=0)
                 {
                     Console.WriteLine("Current Inventory:");
-                    foreach (string items in inventory)
-                    {
-                        Console.WriteLine("\t" + items);
-                    }
+                    showInventory();
                 }
                 else
                 {
@@ -150,7 +117,6 @@
             if (userChoice == 2)
             {
                 string itemRemove;
-                bool itemMatch;
 
                 Console.WriteLine("\nUpdate Inventory:");
                 //show the list of inventory in array form
@@ -167,41 +133,30 @@
                     inventoryItem = Console.ReadLine();
                     inventory.Add(inventoryItem);
                     Console.WriteLine("Current Invetory: ");
-                    foreach (string items in inventory)
-                    {
-                        Console.WriteLine("\t" + items);
-                    }
+                    showInventory();
                 }
                 else if (inventoryOption == 2)
                 {
                     if (inventory.Count != 0)
                     {
                         Console.WriteLine("Current Inventory: ");
-                        foreach (string items in inventory)
-                        {
-                            Console.WriteLine("\t" + items);
-                        }
-                        
+                        showInventory();
+
                         Console.Write("Item name to be removed: ");
                         itemRemove = Console.ReadLine();
 
-                        itemMatch = inventory.Contains(itemRemove);
-
-                        if (itemMatch == true)
+                        if (inventory.Contains(itemRemove))
                         {
                             Console.WriteLine($"\n'{itemRemove}' removed from the inventory.");
                             inventory.Remove(itemRemove);
 
                             Console.WriteLine("Current Inventory: ");
-                            foreach (string items in inventory)
-                            {
-                                Console.WriteLine("\t" + items);
-                            }
+                            showInventory();
                             Console.WriteLine();
                         }
                         else
                         {
-                            Console.WriteLine("Either item name is invalid or item does not exist on the list.");
+                            Console.WriteLine("Either item name is incorrect or item does not exist on the list.");
                         }
                     }
                     else
@@ -214,6 +169,35 @@
                     Console.WriteLine("Invalid option.");
                 }
             }
+        }
+
+        static void DailyReport(byte userChoice)
+        {
+            if (userChoice == 3)
+            {
+                if (dailyReport == null)
+                {
+                    Console.WriteLine("No current report.");
+                }
+                else
+                {
+                    updateDailyReport = dailyReport;
+                    Console.WriteLine($"Last Daily Report: {updateDailyReport}");
+                }
+
+            }
+            else if (userChoice == 4)
+            {
+                Console.Write("Create Daily Report: ");
+                dailyReport = Console.ReadLine();
+                Console.WriteLine("Report Updated.");
+                Console.WriteLine($"Last Daily Report: {dailyReport}");
+            }
+            else
+            {
+                Console.WriteLine("Invalid Input.");
+            }
+
         }
 
         static void EarningReport(byte userChoice)
@@ -244,5 +228,13 @@
             }
         }
 
+        static void showInventory()
+        {
+            foreach (string items in inventory)
+            {
+                Console.WriteLine("\t" + items);
+            }
+        }
+        
     }   
 }
