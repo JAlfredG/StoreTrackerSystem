@@ -11,7 +11,7 @@ namespace StoreTrackerSystem
         {
             //local variables
             bool loginLoop = false;
-            short loginAttempts = 0;
+            string userName, password;
             
             Console.WriteLine("Welcome to Store Tracker!");
 
@@ -20,12 +20,12 @@ namespace StoreTrackerSystem
             {
                 //get username and password
                 Console.Write("Username: ");
-                STSProcess.userName = Console.ReadLine();
+                userName = Console.ReadLine();
                 Console.Write("Password: ");
-                STSProcess.password = Console.ReadLine();
+                password = Console.ReadLine();
 
                 //check if username and password are correct
-                if (STSProcess.LogInValid())
+                if (STSProcess.LogInValid(userName, password))
                 {
                     Console.WriteLine("Login Successful!\n");
 
@@ -69,12 +69,10 @@ namespace StoreTrackerSystem
                 else
                 {
                     Console.WriteLine("Invalid Username or Password.");
-                    loginAttempts++;
 
-                    if (loginAttempts == 5)
+                    if (STSProcess.LogInAttempts())
                     {
                         Console.WriteLine("Too many attempts. Please try again later.");
-                        loginAttempts = 0;
                         loginLoop = true;
                     }
                 }

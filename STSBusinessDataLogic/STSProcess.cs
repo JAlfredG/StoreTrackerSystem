@@ -2,11 +2,26 @@
 {
     public class STSProcess
     {
-        public static string userName, password;
+        static string userName = "admin", password = "admin";
         public static List<string> inventory = new List<string>();
-        public static bool LogInValid()
+        static short loginAttempts = 0;
+
+        public static bool LogInValid(string userInput, string passInput)
         {
-             return userName == "admin" && password == "admin";
+             return userInput == userName && passInput == password;
+        }
+
+        public static bool LogInAttempts()
+        {
+            loginAttempts++;
+
+            if(loginAttempts == 5)
+            {
+                loginAttempts = 0;
+                return true;
+            }
+
+            return false;
         }
 
         public static bool CheckInventory()
