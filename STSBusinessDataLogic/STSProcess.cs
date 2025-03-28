@@ -3,8 +3,8 @@
     public class STSProcess
     {
         static string userName = "admin", password = "admin";
-        public static List<string> inventory = new List<string>();
         static short loginAttempts = 0;
+        public static List<string> inventory = new List<string>();
 
         public static bool LogInValid(string userInput, string passInput)
         {

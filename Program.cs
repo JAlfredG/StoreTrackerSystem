@@ -9,74 +9,64 @@ namespace StoreTrackerSystem
         static string dailyReport = null, earningsReport = null, updateDailyReport, updateEarningsReport, inventoryItem, itemRemove;
         static void Main(string[] args)
         {
-            //local variables
-            bool loginLoop = false;
             string userName, password;
             
             Console.WriteLine("Welcome to Store Tracker!");
 
-            //loop until login is successful
-            while (!loginLoop)
+            //log in frame
+            do
             {
-                //get username and password
                 Console.Write("Username: ");
                 userName = Console.ReadLine();
                 Console.Write("Password: ");
                 password = Console.ReadLine();
 
-                //check if username and password are correct
-                if (STSProcess.LogInValid(userName, password))
-                {
-                    Console.WriteLine("Login Successful!\n");
-
-                    //show options/functions on loop
-                    do
-                    {
-                        ShowSystemOptions();
-
-                        //function depending on choice made
-                        switch (systemOption)
-                        {
-                            case 1:
-                                viewInventory(); //view inventory
-                                break;
-                            case 2:
-                                updateInventory(); //update inventory
-                                break;
-                            case 3:
-                                viewDailyReport(); //show the last daily report
-                                break;
-                            case 4:
-                                createDailyReport(); //create a daily report for that day
-                                break;
-                            case 5:
-                                viewEarningReport(); //show the last earning report
-                                break;
-                            case 6:
-                                createEarningReport(); //create earnings report
-                                break;
-                            case 7:
-                                Console.WriteLine("Thank you for using our program!"); //exit the program
-                                break;
-                            default:
-                                Console.WriteLine("Invalid Option");
-                                break;
-                        }
-                        Console.WriteLine();
-                    } while (systemOption != 7);
-                    loginLoop = true;
-                }
-                else
+                if(!STSProcess.LogInValid(userName, password))
                 {
                     Console.WriteLine("Invalid Username or Password.");
 
                     if (STSProcess.LogInAttempts())
                     {
                         Console.WriteLine("Too many attempts. Please try again later.");
-                        loginLoop = true;
+                        break;
                     }
                 }
-            }                       
+            } while (!STSProcess.LogInValid(userName, password));
+
+            Console.WriteLine("Login Successful!\n");
+            //system options
+            do
+            {
+                ShowSystemOptions();
+                switch (systemOption)
+                {
+                    case 1:
+                        viewInventory(); //view inventory
+                        break;
+                    case 2:
+                        updateInventory(); //update inventory
+                        break;
+                    case 3:
+                        viewDailyReport(); //show the last daily report
+                        break;
+                    case 4:
+                        createDailyReport(); //create a daily report for that day
+                        break;
+                    case 5:
+                        viewEarningReport(); //show the last earning report
+                        break;
+                    case 6:
+                        createEarningReport(); //create earnings report
+                        break;
+                    case 7:
+                        Console.WriteLine("Thank you for using our program!"); //exit the program
+                        break;
+                    default:
+                        Console.WriteLine("Invalid Option");
+                        break;
+                }
+                Console.WriteLine();
+            } while (systemOption != 7);
         }
 
         static void ShowSystemOptions()
