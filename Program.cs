@@ -6,7 +6,7 @@ namespace StoreTrackerSystem
     {
         //global variables
         static byte systemOption, inventoryOption;
-        static string dailyReport = null, earningsReport = null, updateDailyReport, updateEarningsReport, inventoryItem, itemRemove;
+        static string dailyReport = null, earningsReport = null, updateDailyReport, updateEarningsReport, inventoryItem;
         static void Main(string[] args)
         {
             string userName, password;
@@ -28,7 +28,7 @@ namespace StoreTrackerSystem
                     if (STSProcess.LogInAttempts())
                     {
                         Console.WriteLine("Too many attempts. Please try again later.");
-                        break;
+                        return;
                     }
                 }
             } while (!STSProcess.LogInValid(userName, password));
@@ -88,7 +88,6 @@ namespace StoreTrackerSystem
         {
             if (STSProcess.CheckInventory())
             {
-                Console.WriteLine("Current Inventory:");
                 showInventory();
             }
             else
@@ -125,13 +124,13 @@ namespace StoreTrackerSystem
         {
             Console.Write("Add Item to Inventory: ");
             inventoryItem = Console.ReadLine();
-            STSProcess.inventory.Add(inventoryItem);
-            Console.WriteLine("Current Invetory: ");
+            STSProcess.UpdateInventory(Actions.AddItem, inventoryItem);
             showInventory();
         }
 
         static void showInventory()
         {
+            Console.WriteLine("Current Inventory: ");
             foreach (string items in STSProcess.inventory)
             {
                 Console.WriteLine("\t" + items);
@@ -142,18 +141,14 @@ namespace StoreTrackerSystem
         {
             if (STSProcess.CheckInventory())
             {
-                Console.WriteLine("Current Inventory: ");
                 showInventory();
-
                 Console.Write("Item name to be removed: ");
-                itemRemove = Console.ReadLine();
+                inventoryItem = Console.ReadLine();
 
-                if (STSProcess.inventory.Contains(itemRemove))
+                if (STSProcess.inventory.Contains(inventoryItem))
                 {
-                    Console.WriteLine($"\n'{itemRemove}' removed from the inventory.");
-                    STSProcess.inventory.Remove(itemRemove);
-
-                    Console.WriteLine("Current Inventory: ");
+                    Console.WriteLine($"\n'{inventoryItem}' removed from the inventory.");
+                    STSProcess.UpdateInventory(Actions.RemoveItem, inventoryItem);
                     showInventory();
                     Console.WriteLine();
                 }

@@ -28,5 +28,18 @@
         {
             return inventory.Count != 0;
         }
+
+        public static string UpdateInventory(Actions userAction, string item)
+        {
+            if (userAction == Actions.AddItem)
+            {
+                inventory.Add(item);
+            }
+            else if (userAction == Actions.RemoveItem)
+            {
+                inventory.Remove(item);
+            }
+            return item;
+        }
     }
 }
