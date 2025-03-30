@@ -9,6 +9,7 @@ namespace STSBusinessDataLogic
     public enum Actions
     {
         AddItem,
-        RemoveItem
+        RemoveItem,
+        UpdateQuantity
     }
 }

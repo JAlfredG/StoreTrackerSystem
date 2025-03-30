@@ -4,15 +4,15 @@ namespace StoreTrackerSystem
 {
     internal class Program
     {
-        //global variables
         static byte systemOption, inventoryOption;
         static string dailyReport = null, earningsReport = null, updateDailyReport, updateEarningsReport, inventoryItem;
+
         static void Main(string[] args)
         {
             string userName, password;
             
             Console.WriteLine("Welcome to Store Tracker!");
-
+            
             //log in frame
             do
             {
@@ -37,33 +37,39 @@ namespace StoreTrackerSystem
             //system options
             do
             {
-                ShowSystemOptions();
-                switch (systemOption)
+                try
                 {
-                    case 1:
-                        viewInventory(); //view inventory
-                        break;
-                    case 2:
-                        updateInventory(); //update inventory
-                        break;
-                    case 3:
-                        viewDailyReport(); //show the last daily report
-                        break;
-                    case 4:
-                        createDailyReport(); //create a daily report for that day
-                        break;
-                    case 5:
-                        viewEarningReport(); //show the last earning report
-                        break;
-                    case 6:
-                        createEarningReport(); //create earnings report
-                        break;
-                    case 7:
-                        Console.WriteLine("Thank you for using our program!"); //exit the program
-                        break;
-                    default:
-                        Console.WriteLine("Invalid Option");
-                        break;
+                    ShowSystemOptions();
+                    switch (systemOption)
+                    {
+                        case 1:
+                            viewInventory(); //view inventory
+                            break;
+                        case 2:
+                            updateInventory(); //update inventory
+                            break;
+                        case 3:
+                            viewDailyReport(); //show the last daily report
+                            break;
+                        case 4:
+                            createDailyReport(); //create a daily report for that day
+                            break;
+                        case 5:
+                            viewEarningReport(); //show the last earning report
+                            break;
+                        case 6:
+                            createEarningReport(); //create earnings report
+                            break;
+                        case 7:
+                            Console.WriteLine("Thank you for using our program!"); //exit the program
+                            break;
+                        default:
+                            Console.WriteLine("Invalid Option");
+                            break;
+                    }
+                } catch (Exception e)
+                {
+                    Console.WriteLine("Invalid input.");
                 }
                 Console.WriteLine();
             } while (systemOption != 7);
@@ -98,42 +104,69 @@ namespace StoreTrackerSystem
 
         static void updateInventory()
         {
-            Console.WriteLine("\nUpdate Inventory:");
-            Console.Write("""
+            Console.Clear();
+            Console.WriteLine("Welcome to Store Tracker!");
+            do
+            {
+                Console.WriteLine("\nUpdate Inventory:");
+                Console.Write("""
                 [1] Add Item
                 [2] Remove Item
+                [3] Update Item Quantity
+                [4] Back
                 UserInput: 
                 """);
-            inventoryOption = Convert.ToByte(Console.ReadLine());
+                inventoryOption = Convert.ToByte(Console.ReadLine());
 
-            if (inventoryOption == 1)
-            {
-                inventoryAddItem();
-            }
-            else if (inventoryOption == 2)
-            {
-                inventoryRemoveItem();
-            }
-            else
-            {
-                Console.WriteLine("Invalid option.");
-            }
-        }
-
-        static void inventoryAddItem()
-        {
-            Console.Write("Add Item to Inventory: ");
-            inventoryItem = Console.ReadLine();
-            STSProcess.UpdateInventory(Actions.AddItem, inventoryItem);
-            showInventory();
+                if (inventoryOption == 1)
+                {
+                    inventoryAddItem();
+                }
+                else if (inventoryOption == 2)
+                {
+                    inventoryRemoveItem();
+                }
+                else if(inventoryOption == 3)
+                {
+                    updateItemQuantity();
+                }
+                else if (inventoryOption == 4)
+                {
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("Invalid option.");
+                }
+            } while (inventoryOption != 4);
         }
 
         static void showInventory()
         {
             Console.WriteLine("Current Inventory: ");
-            foreach (string items in STSProcess.inventory)
+            Console.WriteLine("\tItem name : Quantity");
+            foreach (var items in STSProcess.inventory)
             {
-                Console.WriteLine("\t" + items);
+                Console.WriteLine($"\t{items.Key} : {items.Value}");
+            }
+        }
+
+        static void inventoryAddItem()
+        {
+            showInventory();
+            Console.Write("Add Item to Inventory: ");
+            inventoryItem = Console.ReadLine().Trim().ToLower();
+            Console.Write("Item Quantity: ");
+            STSProcess.itemQuantity = Convert.ToInt32(Console.ReadLine());
+
+            if (STSProcess.CheckItemQuantity() && !STSProcess.CheckItemInInventory(inventoryItem))
+            {
+                STSProcess.UpdateInventory(Actions.AddItem, inventoryItem);
+                showInventory();
+            }
+            else
+            {
+                Console.WriteLine("Either item already exist in the inventory or invalid quantity.");
             }
         }
 
@@ -143,14 +176,13 @@ namespace StoreTrackerSystem
             {
                 showInventory();
                 Console.Write("Item name to be removed: ");
-                inventoryItem = Console.ReadLine();
+                inventoryItem = Console.ReadLine().Trim().ToLower();
 
-                if (STSProcess.inventory.Contains(inventoryItem))
+                if (STSProcess.CheckItemInInventory(inventoryItem))
                 {
                     Console.WriteLine($"\n'{inventoryItem}' removed from the inventory.");
                     STSProcess.UpdateInventory(Actions.RemoveItem, inventoryItem);
                     showInventory();
-                    Console.WriteLine();
                 }
                 else
                 {
@@ -161,6 +193,33 @@ namespace StoreTrackerSystem
             {
                 Console.WriteLine("Inventory is empty.");
             }
+        }
+
+        static void updateItemQuantity()
+        {
+            if (STSProcess.CheckInventory())
+            {
+                showInventory();
+                Console.Write("Input item name: ");
+                inventoryItem = Console.ReadLine().Trim().ToLower();
+                Console.Write("Input new item quantity: ");
+                STSProcess.itemQuantity = Convert.ToInt32(Console.ReadLine());
+
+                if (STSProcess.CheckItemInInventory(inventoryItem) && STSProcess.CheckItemQuantity())
+                {
+                    STSProcess.UpdateInventory(Actions.UpdateQuantity, inventoryItem);
+                    showInventory();
+                }
+                else
+                {
+                    Console.WriteLine("Either item name is incorrect, item does not exist on the list, or invalid item quantity.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Inventory is empty.");
+            }
+
         }
 
         static void viewDailyReport()
