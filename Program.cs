@@ -5,7 +5,7 @@ namespace StoreTrackerSystem
     internal class Program
     {
         static byte systemOption, inventoryOption;
-        static string dailyReport = null, earningsReport = null, updateDailyReport, updateEarningsReport, inventoryItem;
+        static string earningsReport = null, updateEarningsReport, inventoryItem;
 
         static void Main(string[] args)
         {
@@ -21,17 +21,17 @@ namespace StoreTrackerSystem
                 Console.Write("Password: ");
                 password = Console.ReadLine();
 
-                if(!STSProcess.LogInValid(userName, password))
+                if(!LogInFunction.LogInValid(userName, password))
                 {
                     Console.WriteLine("Invalid Username or Password.");
 
-                    if (STSProcess.LogInAttempts())
+                    if (LogInFunction.LogInAttempts())
                     {
                         Console.WriteLine("Too many attempts. Please try again later.");
                         return;
                     }
                 }
-            } while (!STSProcess.LogInValid(userName, password));
+            } while (!LogInFunction.LogInValid(userName, password));
 
             Console.WriteLine("Login Successful!\n");
             //system options
@@ -92,7 +92,7 @@ namespace StoreTrackerSystem
 
         static void viewInventory()
         {
-            if (STSProcess.CheckInventory())
+            if (InventoryManagementBL.CheckInventory())
             {
                 showInventory();
             }
@@ -145,7 +145,7 @@ namespace StoreTrackerSystem
         {
             Console.WriteLine("Current Inventory: ");
             Console.WriteLine("\tItem name : Quantity");
-            foreach (var items in STSProcess.inventory)
+            foreach (var items in InventoryManagementBL.inventory)
             {
                 Console.WriteLine($"\t{items.Key} : {items.Value}");
             }
@@ -157,11 +157,11 @@ namespace StoreTrackerSystem
             Console.Write("Add Item to Inventory: ");
             inventoryItem = Console.ReadLine().Trim().ToLower();
             Console.Write("Item Quantity: ");
-            STSProcess.itemQuantity = Convert.ToInt32(Console.ReadLine());
+            InventoryManagementBL.itemQuantity = Convert.ToInt32(Console.ReadLine());
 
-            if (STSProcess.CheckItemQuantity() && !STSProcess.CheckItemInInventory(inventoryItem))
+            if (InventoryManagementBL.CheckItemQuantity() && !InventoryManagementBL.CheckItemInInventory(inventoryItem))
             {
-                STSProcess.UpdateInventory(Actions.AddItem, inventoryItem);
+                InventoryManagementBL.UpdateInventory(Actions.AddItem, inventoryItem);
                 showInventory();
             }
             else
@@ -172,16 +172,16 @@ namespace StoreTrackerSystem
 
         static void inventoryRemoveItem()
         {
-            if (STSProcess.CheckInventory())
+            if (InventoryManagementBL.CheckInventory())
             {
                 showInventory();
                 Console.Write("Item name to be removed: ");
                 inventoryItem = Console.ReadLine().Trim().ToLower();
 
-                if (STSProcess.CheckItemInInventory(inventoryItem))
+                if (InventoryManagementBL.CheckItemInInventory(inventoryItem))
                 {
                     Console.WriteLine($"\n'{inventoryItem}' removed from the inventory.");
-                    STSProcess.UpdateInventory(Actions.RemoveItem, inventoryItem);
+                    InventoryManagementBL.UpdateInventory(Actions.RemoveItem, inventoryItem);
                     showInventory();
                 }
                 else
@@ -197,17 +197,17 @@ namespace StoreTrackerSystem
 
         static void updateItemQuantity()
         {
-            if (STSProcess.CheckInventory())
+            if (InventoryManagementBL.CheckInventory())
             {
                 showInventory();
                 Console.Write("Input item name: ");
                 inventoryItem = Console.ReadLine().Trim().ToLower();
                 Console.Write("Input new item quantity: ");
-                STSProcess.itemQuantity = Convert.ToInt32(Console.ReadLine());
+                InventoryManagementBL.itemQuantity = Convert.ToInt32(Console.ReadLine());
 
-                if (STSProcess.CheckItemInInventory(inventoryItem) && STSProcess.CheckItemQuantity())
+                if (InventoryManagementBL.CheckItemInInventory(inventoryItem) && InventoryManagementBL.CheckItemQuantity())
                 {
-                    STSProcess.UpdateInventory(Actions.UpdateQuantity, inventoryItem);
+                    InventoryManagementBL.UpdateInventory(Actions.UpdateQuantity, inventoryItem);
                     showInventory();
                 }
                 else
@@ -224,23 +224,22 @@ namespace StoreTrackerSystem
 
         static void viewDailyReport()
         {
-            if (dailyReport == null)
+            if (DailyReportBL.CheckDailyReport())
             {
-                Console.WriteLine("No current report.");
+                Console.WriteLine($"Last Daily Report: {DailyReportBL.dailyReport}");
             }
             else
             {
-                updateDailyReport = dailyReport;
-                Console.WriteLine($"Last Daily Report: {updateDailyReport}");
+                Console.WriteLine("No current report.");
             }
         }
 
         static void createDailyReport()
         {
             Console.Write("Create Daily Report: ");
-            dailyReport = Console.ReadLine();
+            DailyReportBL.createDailyReport(Console.ReadLine());
             Console.WriteLine("Report Updated.");
-            Console.WriteLine($"Daily Report: {dailyReport}");
+            Console.WriteLine($"Daily Report: {DailyReportBL.dailyReport}");
         }
 
         static void viewEarningReport()
