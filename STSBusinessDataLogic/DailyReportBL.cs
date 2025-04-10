@@ -19,7 +19,7 @@ namespace STSBusinessDataLogic
             return false;
         }
 
-        public static string createDailyReport(string report)
+        public static string CreateDailyReport(string report)
         {
             dailyReport = report;
             return dailyReport;

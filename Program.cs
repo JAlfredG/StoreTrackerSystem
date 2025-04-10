@@ -5,7 +5,7 @@ namespace StoreTrackerSystem
     internal class Program
     {
         static byte systemOption, inventoryOption;
-        static string earningsReport = null, updateEarningsReport, inventoryItem;
+        static string inventoryItem;
 
         static void Main(string[] args)
         {
@@ -39,7 +39,7 @@ namespace StoreTrackerSystem
             {
                 try
                 {
-                    ShowSystemOptions();
+                    showSystemOptions();
                     switch (systemOption)
                     {
                         case 1:
@@ -55,10 +55,10 @@ namespace StoreTrackerSystem
                             createDailyReport(); //create a daily report for that day
                             break;
                         case 5:
-                            viewEarningReport(); //show the last earning report
+                            viewSalesReport(); //show the last earning report
                             break;
                         case 6:
-                            createEarningReport(); //create earnings report
+                            createSalesReport(); //create earnings report
                             break;
                         case 7:
                             Console.WriteLine("Thank you for using our program!"); //exit the program
@@ -75,15 +75,15 @@ namespace StoreTrackerSystem
             } while (systemOption != 7);
         }
 
-        static void ShowSystemOptions()
+        static void showSystemOptions()
         {
             Console.Write("""
                             [1] View Inventory
                             [2] Update Inventory
-                            [3] View Last Daily Report
+                            [3] View Daily Report
                             [4] Create Daily Report
-                            [5] View Last Earning Report
-                            [6] Create Earning Report
+                            [5] View Sales Report
+                            [6] Create Sales Report
                             [7] Exit
                             UserInput: 
                             """);
@@ -237,31 +237,46 @@ namespace StoreTrackerSystem
         static void createDailyReport()
         {
             Console.Write("Create Daily Report: ");
-            DailyReportBL.createDailyReport(Console.ReadLine());
+            DailyReportBL.CreateDailyReport(Console.ReadLine());
             Console.WriteLine("Report Updated.");
             Console.WriteLine($"Daily Report: {DailyReportBL.dailyReport}");
         }
 
-        static void viewEarningReport()
+
+        static void viewSalesReport()
         {
-            if (earningsReport == null)
+            if (!SalesReportBL.CheckInitialProfit())
             {
-                Console.WriteLine("No current report.");
+                SalesReportBL.CalculateProfitDifference();
+                SalesReportBL.CalculateProfitPercentage();
+                Console.WriteLine($"Initial Profit: {SalesReportBL.initialProfit}");
+                Console.WriteLine($"Today's Profit: {SalesReportBL.newProfit}");
+                Console.WriteLine($"Profit Difference: {SalesReportBL.difference}");
+                Console.WriteLine($"Profit Percentage: {SalesReportBL.percentage}%");
             }
             else
             {
-                updateEarningsReport = earningsReport;
-                Console.WriteLine($"Last Earnings Report: {updateEarningsReport}");
+                Console.WriteLine("No current report.");
             }
+
         }
 
-        static void createEarningReport()
+        static void createSalesReport()
         {
-            Console.Write("Create Earnings Report: ");
-            earningsReport = Console.ReadLine();
-            Console.WriteLine("Report Updated.");
-            Console.WriteLine($"Earnings Report: {earningsReport}");
+            Console.Write("Input today's profit: ");
+            if (SalesReportBL.CheckInitialProfit())
+            {
+                SalesReportBL.initialProfit = Convert.ToDouble(Console.ReadLine());
+            }
+            else if(SalesReportBL.CheckNewProfit())
+            {
+                SalesReportBL.newProfit = Convert.ToDouble(Console.ReadLine());
+            }
+            else
+            {
+                SalesReportBL.tempProfit = Convert.ToDouble(Console.ReadLine());
+                SalesReportBL.UpdateProfit();
+            }
         }
-        
     }   
 }
