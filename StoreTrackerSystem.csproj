@@ -9,8 +9,14 @@
 
   <ItemGroup>
     <Compile Remove="STSBusinessDataLogic\**" />
+    <Compile Remove="STSCommon\**" />
+    <Compile Remove="STSDataService\**" />
     <EmbeddedResource Remove="STSBusinessDataLogic\**" />
+    <EmbeddedResource Remove="STSCommon\**" />
+    <EmbeddedResource Remove="STSDataService\**" />
     <None Remove="STSBusinessDataLogic\**" />
+    <None Remove="STSCommon\**" />
+    <None Remove="STSDataService\**" />
   </ItemGroup>
 
   <ItemGroup>

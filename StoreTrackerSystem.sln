@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreTrackerSystem", "Store
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STSBusinessDataLogic", "STSBusinessDataLogic\STSBusinessDataLogic.csproj", "{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STSDataService", "STSDataService\STSDataService.csproj", "{89AF7052-6C3A-4743-BA53-AE1C7EB1BF55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STSCommon", "STSCommon\STSCommon.csproj", "{2B6288AE-967E-4EC5-9A16-B4C95B2D08F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4814CAC-03BA-477C-B4E4-9B886AEBE4D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89AF7052-6C3A-4743-BA53-AE1C7EB1BF55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89AF7052-6C3A-4743-BA53-AE1C7EB1BF55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89AF7052-6C3A-4743-BA53-AE1C7EB1BF55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89AF7052-6C3A-4743-BA53-AE1C7EB1BF55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B6288AE-967E-4EC5-9A16-B4C95B2D08F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6288AE-967E-4EC5-9A16-B4C95B2D08F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6288AE-967E-4EC5-9A16-B4C95B2D08F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6288AE-967E-4EC5-9A16-B4C95B2D08F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

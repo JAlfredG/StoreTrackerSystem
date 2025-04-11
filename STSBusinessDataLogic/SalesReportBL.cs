@@ -10,7 +10,6 @@ namespace STSBusinessDataLogic
     {
         public static double tempProfit = 0.0, initialProfit = 0.0, newProfit = 0.0, difference = 0.0, percentage = 0.0;
         
-
         public static bool CheckInitialProfit()
         {
              return initialProfit == 0.0;
