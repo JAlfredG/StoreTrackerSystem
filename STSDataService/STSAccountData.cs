@@ -9,40 +9,16 @@ namespace STSDataService
 {
     public class STSAccountData
     {
-        List<StoreAccount> accounts = new List<StoreAccount>();
+        ISTSAccountDataService STSAccountDataService;
         public STSAccountData()
         {
-            CreateAccounts();
+            STSAccountDataService = new AccountDataInMemory();
+            //STSAccountDataService = new AccountDataTextFile();
+            //STSAccountDataService = new AccountDataJasonFile();
         }
-        private void CreateAccounts()
+        public List<StoreAccount> GetAllAccounts()
         {
-            accounts.Add(new StoreAccount
-            {
-                UserName = "Alfred",
-                Password = "program",
-                StorePosition = "owner",
-                AccountId = "05-09-04"
-            });
-
-            accounts.Add(new StoreAccount
-            {
-                UserName = "admin",
-                Password = "admin",
-                StorePosition = "cashier",
-                AccountId = "11-22-33"
-            });
+            return STSAccountDataService.GetAccounts();
         }
-        public bool ValidateUserAccount(string username, string password)
-        {
-            foreach (var account in accounts)
-            {
-                if (account.UserName == username && account.Password == password)
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
     }
 }

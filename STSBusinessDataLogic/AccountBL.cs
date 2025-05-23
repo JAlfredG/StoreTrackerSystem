@@ -1,4 +1,5 @@
-﻿using STSDataService;
+﻿using STSCommon;
+using STSDataService;
 
 namespace STSBusinessDataLogic
 {
@@ -10,7 +11,29 @@ namespace STSBusinessDataLogic
 
         public bool LogInValid(string userInput, string passInput)
         {
-            return accountData.ValidateUserAccount(userInput, passInput);
+            var account = GetSTSAccount(userInput, passInput);
+
+            if (account.UserName != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private StoreAccount GetSTSAccount(string username, string password)
+        {
+            var STSAccounts = accountData.GetAllAccounts();
+            var accountFound = new StoreAccount();
+
+            foreach (var account in STSAccounts)
+            {
+                if (account.UserName == username && account.Password == password)
+                {
+                    accountFound = account;
+                }
+            }
+            return accountFound;
         }
 
         public bool LogInAttempts()

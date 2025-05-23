@@ -7,6 +7,9 @@ using STSCommon;
 
 namespace STSBusinessDataLogic
 {
+
+    //TO BE FIXED
+
     public class InventoryBL
     {
         public static int itemQuantity;
