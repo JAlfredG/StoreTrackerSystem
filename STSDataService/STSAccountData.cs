@@ -12,13 +12,16 @@ namespace STSDataService
         ISTSAccountDataService STSAccountDataService;
         public STSAccountData()
         {
-            STSAccountDataService = new AccountDataInMemory();
+            //STSAccountDataService = new AccountDataInMemory();
             //STSAccountDataService = new AccountDataTextFile();
             //STSAccountDataService = new AccountDataJasonFile();
+            STSAccountDataService = new DBDataService();
         }
         public List<StoreAccount> GetAllAccounts()
         {
             return STSAccountDataService.GetAccounts();
         }
+
+
     }
 }

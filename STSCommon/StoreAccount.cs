@@ -12,6 +12,8 @@ namespace STSCommon
         public string Password { get; set; }
         public string StorePosition { get; set; }
         public string AccountId { get; set; }
+
+        
     }
 
 }
