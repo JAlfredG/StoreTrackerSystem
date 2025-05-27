@@ -7,15 +7,15 @@ using STSCommon;
 
 namespace STSDataService
 {
-    public class STSAccountData
+    public class AccountSTSData
     {
-        ISTSAccountDataService STSAccountDataService;
-        public STSAccountData()
+        AccountISTSDataService STSAccountDataService;
+        public AccountSTSData()
         {
             //STSAccountDataService = new AccountDataInMemory();
-            //STSAccountDataService = new AccountDataTextFile();
+            STSAccountDataService = new AccountDataTextFile();
             //STSAccountDataService = new AccountDataJasonFile();
-            STSAccountDataService = new DBDataService();
+            //STSAccountDataService = new AccountDBDataService();
         }
         public List<StoreAccount> GetAllAccounts()
         {

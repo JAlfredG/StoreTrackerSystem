@@ -9,22 +9,23 @@ namespace STSDataService
 {
 
     //TO BE FIXED
-    public class STSInventoryData
+    public class InventorySTSData
     {
-        ISTSInventoryDataService STSInventoryDataService;
-        public STSInventoryData()
+        InventoryISTSDataSercvice STSInventoryDataService;
+        public InventorySTSData()
         {
-            STSInventoryDataService = new InventoryDataTextFile();
+            STSInventoryDataService = new InventoryDataInMemory();
+            //STSInventoryDataService = new InventoryDBDataService();
         }
 
         public List<ItemInventory> GetInventory()
         {
-            return STSInventoryDataService.GetItemInventory();
+            return STSInventoryDataService.GetInventory();
         }
 
-        public void CreateItem(ItemInventory inventory)
+        public void AddItem(ItemInventory inventory)
         {
-            STSInventoryDataService.CreateItem(inventory);
+            STSInventoryDataService.AddItem(inventory);
         }
 
         public void UpdateItemQuantity(ItemInventory inventory)

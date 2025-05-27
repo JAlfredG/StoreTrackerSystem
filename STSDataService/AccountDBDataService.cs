@@ -9,14 +9,14 @@ using Microsoft.Data.SqlClient;
 
 namespace STSDataService
 {
-    public class DBDataService : ISTSAccountDataService
+    public class AccountDBDataService : AccountISTSDataService
     {
         //connectionString
         static string connectionString = "Data Source =LAPTOP-P710F399\\SQLEXPRESS; Initial Catalog = StoreTrackerSystem; Integrated Security = True; TrustServerCertificate=True;";
 
         static SqlConnection sqlConnection;
 
-        public DBDataService()
+        public AccountDBDataService()
         {
             sqlConnection = new SqlConnection(connectionString);
         }

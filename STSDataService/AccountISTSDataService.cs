@@ -7,7 +7,7 @@ using STSCommon;
 
 namespace STSDataService
 {
-    public interface ISTSAccountDataService
+    public interface AccountISTSDataService
     {
         public List<StoreAccount> GetAccounts();
 

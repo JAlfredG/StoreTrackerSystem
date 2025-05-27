@@ -7,7 +7,7 @@ using STSCommon;
 
 namespace STSDataService
 {
-    public class AccountDataInMemory : ISTSAccountDataService
+    public class AccountDataInMemory : AccountISTSDataService
     {
         List<StoreAccount> accounts = new List<StoreAccount>();
         public AccountDataInMemory()
@@ -18,7 +18,7 @@ namespace STSDataService
         {
             accounts.Add(new StoreAccount
             {
-                UserName = "Alfred",
+                UserName = "alfred",
                 Password = "program",
                 StorePosition = "owner",
                 AccountId = "05-09-04"

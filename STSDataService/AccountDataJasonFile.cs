@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace STSDataService
 {
-    public class AccountDataJasonFile : ISTSAccountDataService
+    public class AccountDataJasonFile : AccountISTSDataService
     {
         static List<StoreAccount> accounts = new List<StoreAccount>();
         static string jsonFilePath = "accounts.json";

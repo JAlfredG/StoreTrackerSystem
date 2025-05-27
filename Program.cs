@@ -138,11 +138,12 @@ namespace StoreTrackerSystem
 
         static void viewInventory()
         {
+
             if (InventoryBL.CheckInventory())
             {
                 Console.WriteLine("Current Inventory: ");
                 Console.WriteLine("\tItem name \t: Quantity \t: Price");
-                foreach (var items in InventoryBL.items)
+                foreach (var items in InventoryBL.GetInventory())
                 {
                     Console.WriteLine($"\t{items.ItemName} \t\t: {items.ItemQuantity} \t\t: {items.ItemPrice} pesos");
                 }

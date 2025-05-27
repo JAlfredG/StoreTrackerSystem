@@ -6,7 +6,7 @@ namespace STSBusinessDataLogic
     public class AccountBL
     {
 
-        STSAccountData accountData = new STSAccountData();
+        AccountSTSData accountData = new AccountSTSData();
         static short loginAttempts = 0;
 
         public bool LogInValid(string userInput, string passInput)

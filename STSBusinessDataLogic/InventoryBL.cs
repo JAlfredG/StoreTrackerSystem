@@ -4,86 +4,55 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using STSCommon;
+using STSDataService;
 
 namespace STSBusinessDataLogic
 {
-
-    //TO BE FIXED
-
     public class InventoryBL
     {
+        static InventorySTSData inventoryData = new InventorySTSData();
+
         public static int itemQuantity;
         public static double itemPrice;
-        public static List<ItemInventory> items = new List<ItemInventory>();
 
-        public static string UpdateInventory(Actions userAction, string item)
+        public static string UpdateInventory(Actions userAction, string itemName)
         {
+            var item = new ItemInventory
+            {
+                ItemName = itemName,
+                ItemPrice = itemPrice,
+                ItemQuantity = itemQuantity
+            };
+
             if (userAction == Actions.AddItem)
             {
-                AddItem(item, itemQuantity, itemPrice);
+                inventoryData.AddItem(item);
             }
             else if (userAction == Actions.RemoveItem)
             {
-                RemoveItem(item);
-                
+                inventoryData.RemoveItem(item);
+
             }
             else if (userAction == Actions.UpdateQuantity)
             {
-                UpdateQuantity(item);
+                inventoryData.UpdateItemQuantity(item);
             }
-            else if(userAction == Actions.UpdatePrice)
+            else if (userAction == Actions.UpdatePrice)
             {
-                UpdatePrice(item);
+                inventoryData.UpdateItemPrice(item);
             }
-            return item;
+
+            return itemName;
         }
 
-        static void AddItem(string itemname, int itemquantity, double itemprice)
+        public static List<ItemInventory> GetInventory()
         {
-            items.Add(new ItemInventory
-            {
-                ItemName = itemname,
-                ItemQuantity = itemquantity,
-                ItemPrice = itemprice
-            });
+            return inventoryData.GetInventory();
         }
 
-        static void RemoveItem(string itemname)
+        public static bool CheckInventory()
         {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i].ItemName.Equals(itemname, StringComparison.OrdinalIgnoreCase))
-                {
-                    items.RemoveAt(i);
-                }
-            }
-        }
-
-        static void UpdateQuantity(string itemname)
-        {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i].ItemName.Equals(itemname, StringComparison.OrdinalIgnoreCase))
-                {
-                    items[i].ItemQuantity = itemQuantity;
-                }
-            }
-        }
-
-        static void UpdatePrice(string itemname)
-        {
-            for (int i = 0; i < items.Count; i++)
-            {
-                if (items[i].ItemName.Equals(itemname, StringComparison.OrdinalIgnoreCase))
-                {
-                    items[i].ItemPrice = itemPrice;
-                }
-            }
-        }
-
-        public static  bool CheckInventory()
-        {
-            return items.Count > 0;
+            return inventoryData.GetInventory().Count > 0;
         }
 
         public static bool CheckItemQuantity()
@@ -93,9 +62,11 @@ namespace STSBusinessDataLogic
 
         public static bool CheckItemInInventory(string itemInput)
         {
-            foreach(var item in items)
+            var items = inventoryData.GetInventory();
+
+            for (int i = 0; i < items.Count; i++)
             {
-                if(item.ItemName.Equals(itemInput, StringComparison.OrdinalIgnoreCase))
+                if (items[i].ItemName.Equals(itemInput, StringComparison.OrdinalIgnoreCase))
                 {
                     return true;
                 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace STSDataService
 {
-    public class AccountDataTextFile : ISTSAccountDataService
+    public class AccountDataTextFile : AccountISTSDataService
     {
         string filePath = "accounts.txt";
         List<StoreAccount> accounts = new List<StoreAccount>();

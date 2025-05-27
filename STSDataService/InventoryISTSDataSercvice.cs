@@ -10,13 +10,12 @@ namespace STSDataService
 
     //TO BE FIXED
 
-    public interface ISTSInventoryDataService
+    public interface InventoryISTSDataSercvice
     {
-        public List<ItemInventory> GetItemInventory();
-        public void CreateItem(ItemInventory item);
+        public List<ItemInventory> GetInventory();
+        public void AddItem(ItemInventory item);
+        public void RemoveItem(ItemInventory item);
         public void UpdateItemQuantity(ItemInventory item);
         public void UpdateItemPrice(ItemInventory item);
-        public void RemoveItem(ItemInventory item);
-
     }
 }
