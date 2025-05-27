@@ -14,7 +14,7 @@ namespace STSDataService
         {
             //STSAccountDataService = new AccountDataInMemory();
             //STSAccountDataService = new AccountDataTextFile();
-            //STSAccountDataService = new AccountDataJasonFile();
+            //STSAccountDataService = new AccountDataJsonFile();
             STSAccountDataService = new AccountDBDataService();
         }
         public List<StoreAccount> GetAllAccounts()

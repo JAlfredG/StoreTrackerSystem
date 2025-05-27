@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace STSDataService
 {
-    public class AccountDataJasonFile : AccountISTSDataService
+    public class AccountDataJsonFile
+        
+        : AccountISTSDataService
     {
         static List<StoreAccount> accounts = new List<StoreAccount>();
         static string jsonFilePath = "accounts.json";
 
-        public AccountDataJasonFile()
+        public AccountDataJsonFile()
         {
             GetDataFromJsonFile();
         }
