@@ -14,8 +14,8 @@ namespace STSDataService
         InventoryISTSDataSercvice STSInventoryDataService;
         public InventorySTSData()
         {
-            STSInventoryDataService = new InventoryDataInMemory();
-            //STSInventoryDataService = new InventoryDBDataService();
+            //STSInventoryDataService = new InventoryDataInMemory();
+            STSInventoryDataService = new InventoryDBDataService();
         }
 
         public List<ItemInventory> GetInventory()

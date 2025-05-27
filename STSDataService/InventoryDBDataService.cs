@@ -48,19 +48,58 @@ namespace STSDataService
         }
         public void AddItem(ItemInventory item)
         {
-            throw new NotImplementedException();
+            var insertStatement = "INSERT INTO ItemInventory VALUES (@ItemName, @ItemQuantity, @ItemPrice)";
+
+            SqlCommand insertCommand = new SqlCommand(insertStatement, sqlConnection);
+
+            insertCommand.Parameters.AddWithValue("@ItemName", item.ItemName);
+            insertCommand.Parameters.AddWithValue("@ItemQuantity", item.ItemQuantity);
+            insertCommand.Parameters.AddWithValue("@ItemPrice", item.ItemPrice);
+            sqlConnection.Open();
+
+            insertCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
         }
         public void RemoveItem(ItemInventory item)
         {
-            throw new NotImplementedException();
+            sqlConnection.Open();
+
+            var deleteStatement = $"DELETE FROM ItemInventory WHERE ItemName = @ItemName";
+            SqlCommand updateCommand = new SqlCommand(deleteStatement, sqlConnection);
+            updateCommand.Parameters.AddWithValue("@ItemName", item.ItemName);
+
+            updateCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
         }
         public void UpdateItemQuantity(ItemInventory item)
         {
-            throw new NotImplementedException();
+            sqlConnection.Open();
+
+            var updateStatement = $"UPDATE ItemInventory SET ItemQuantity = @ItemQuantity WHERE ItemName = @ItemName";
+
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlConnection);
+
+            updateCommand.Parameters.AddWithValue("@ItemQuantity", item.ItemQuantity);
+            updateCommand.Parameters.AddWithValue("@ItemName", item.ItemName);
+            updateCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
         }
         public void UpdateItemPrice(ItemInventory item)
         {
-            throw new NotImplementedException();
+            sqlConnection.Open();
+
+            var updateStatement = $"UPDATE ItemInventory SET ItemPrice = @ItemPrice WHERE ItemName = @ItemName";
+
+            SqlCommand updateCommand = new SqlCommand(updateStatement, sqlConnection);
+
+            updateCommand.Parameters.AddWithValue("@ItemPrice", item.ItemPrice);
+            updateCommand.Parameters.AddWithValue("@ItemName", item.ItemName);
+            updateCommand.ExecuteNonQuery();
+
+            sqlConnection.Close();
         }
     }
 }
