@@ -68,7 +68,7 @@ namespace StoreTrackerSystem
                             Console.WriteLine("Invalid Option");
                             break;
                     }
-                } catch (Exception e)
+                } catch (Exception)
                 {
                     Console.WriteLine("Invalid input.");
                 }
