@@ -12,10 +12,10 @@ namespace STSDataService
         AccountISTSDataService STSAccountDataService;
         public AccountSTSData()
         {
-            //STSAccountDataService = new AccountDataInMemory();
+            STSAccountDataService = new AccountDataInMemory();
             //STSAccountDataService = new AccountDataTextFile();
             //STSAccountDataService = new AccountDataJsonFile();
-            STSAccountDataService = new AccountDBDataService();
+            //STSAccountDataService = new AccountDBDataService();
         }
         public List<StoreAccount> GetAllAccounts()
         {

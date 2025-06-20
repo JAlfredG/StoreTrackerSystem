@@ -9,12 +9,13 @@ namespace STSBusinessDataLogic
     public class SalesReportBL
     {
         public static double tempProfit = 0.0, initialProfit = 0.0, newProfit = 0.0, difference = 0.0, percentage = 0.0;
-        
-        public static bool CheckInitialProfit()
+
+        public static bool IsInitialProfitUnset()
         {
-             return initialProfit == 0.0;
+            return initialProfit == 0.0;
         }
-        public static bool CheckNewProfit()
+
+        public static bool IsNewProfitUnset()
         {
             return newProfit == 0.0;
         }
@@ -27,19 +28,21 @@ namespace STSBusinessDataLogic
 
         public static double CalculateProfitDifference()
         {
-            if (newProfit != 0.0)
-            {
-                difference = newProfit - initialProfit;
-            }
-            
+            difference = newProfit - initialProfit;
             return difference;
         }
+
         public static double CalculateProfitPercentage()
         {
-            if (newProfit != 0.0)
+            if (initialProfit != 0.0)
             {
-                percentage = ((newProfit - initialProfit)/initialProfit)*100;
+                percentage = (difference / initialProfit) * 100;
             }
+            else
+            {
+                percentage = 0.0;
+            }
+
             return percentage;
         }
     }

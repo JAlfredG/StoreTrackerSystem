@@ -275,14 +275,15 @@ namespace StoreTrackerSystem
 
         static void viewSalesReport()
         {
-            if (!SalesReportBL.CheckInitialProfit())
+            if (!SalesReportBL.IsInitialProfitUnset())
             {
                 SalesReportBL.CalculateProfitDifference();
                 SalesReportBL.CalculateProfitPercentage();
+
                 Console.WriteLine($"Initial Profit: {SalesReportBL.initialProfit}");
                 Console.WriteLine($"Today's Profit: {SalesReportBL.newProfit}");
                 Console.WriteLine($"Profit Difference: {SalesReportBL.difference}");
-                Console.WriteLine($"Profit Percentage: {SalesReportBL.percentage}%");
+                Console.WriteLine($"Profit Percentage: {SalesReportBL.percentage:F2}%");
             }
             else
             {
@@ -294,19 +295,23 @@ namespace StoreTrackerSystem
         static void createSalesReport()
         {
             Console.Write("Input today's profit: ");
-            if (SalesReportBL.CheckInitialProfit())
+            double input = Convert.ToDouble(Console.ReadLine());
+
+            if (SalesReportBL.IsInitialProfitUnset())
             {
-                SalesReportBL.initialProfit = Convert.ToDouble(Console.ReadLine());
+                SalesReportBL.initialProfit = input;
             }
-            else if(SalesReportBL.CheckNewProfit())
+            else if (SalesReportBL.IsNewProfitUnset())
             {
-                SalesReportBL.newProfit = Convert.ToDouble(Console.ReadLine());
+                SalesReportBL.newProfit = input;
             }
             else
             {
-                SalesReportBL.tempProfit = Convert.ToDouble(Console.ReadLine());
+                SalesReportBL.tempProfit = input;
                 SalesReportBL.UpdateProfit();
             }
+
+            Console.WriteLine("Report Updated successfully.\n");
         }
     }   
 }
