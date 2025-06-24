@@ -36,6 +36,11 @@ namespace STSBusinessDataLogic
             return accountFound;
         }
 
+        public List<StoreAccount> GetStoreAccounts()
+        {
+            return accountData.GetAllAccounts();
+        }
+
         public bool LogInAttempts()
         {
             loginAttempts++;

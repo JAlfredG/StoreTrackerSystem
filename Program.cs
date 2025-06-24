@@ -6,14 +6,24 @@ namespace StoreTrackerSystem
     {
         static byte systemOption, inventoryOption;
         static string inventoryItem;
+        static double itemPrice;
+        static int itemQuantity;
         static STSBusinessDataLogic.AccountBL accountService = new STSBusinessDataLogic.AccountBL();
 
         static void Main(string[] args)
         {
             string userName, password;
-            
+
             Console.WriteLine("Welcome to Store Tracker!");
-            
+
+            var accounts = accountService.GetStoreAccounts();
+
+            foreach (var account in accounts)
+            {
+                Console.WriteLine(account.UserName);
+                Console.WriteLine(account.Password);
+            }
+
             //log in frame
             do
             {
@@ -159,13 +169,13 @@ namespace StoreTrackerSystem
             Console.Write("Add Item to Inventory: ");
             inventoryItem = Console.ReadLine().Trim();
             Console.Write("Item Quantity: ");
-            InventoryBL.itemQuantity = Convert.ToInt32(Console.ReadLine());
+            itemQuantity = Convert.ToInt32(Console.ReadLine());
             Console.Write("Item Price: ");
-            InventoryBL.itemPrice = Convert.ToDouble(Console.ReadLine());
+            itemPrice = Convert.ToDouble(Console.ReadLine());
 
-            if (InventoryBL.CheckItemQuantity() && !InventoryBL.CheckItemInInventory(inventoryItem))
+            if (InventoryBL.CheckItemQuantity(itemQuantity) && !InventoryBL.CheckItemInInventory(inventoryItem))
             {
-                InventoryBL.UpdateInventory(Actions.AddItem, inventoryItem);
+                InventoryBL.AddItem(inventoryItem, itemPrice, itemQuantity);
                 Console.WriteLine($"\n '{inventoryItem}' added to the inventory.");
             }
             else
@@ -185,7 +195,7 @@ namespace StoreTrackerSystem
                 if (InventoryBL.CheckItemInInventory(inventoryItem))
                 {
                     Console.WriteLine($"\n'{inventoryItem}' removed from the inventory.");
-                    InventoryBL.UpdateInventory(Actions.RemoveItem, inventoryItem);
+                    InventoryBL.RemoveItem(inventoryItem);
                 }
                 else
                 {
@@ -198,6 +208,7 @@ namespace StoreTrackerSystem
             }
         }
 
+
         static void updateItemQuantity()
         {
             if (InventoryBL.CheckInventory())
@@ -205,12 +216,12 @@ namespace StoreTrackerSystem
                 viewInventory();
                 Console.Write("Input item name: ");
                 inventoryItem = Console.ReadLine().Trim();
-                Console.Write("Input new item quantity: ");
-                InventoryBL.itemQuantity = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Input new item price: ");
+                itemQuantity = Convert.ToInt32(Console.ReadLine());
 
-                if (InventoryBL.CheckItemInInventory(inventoryItem) && InventoryBL.CheckItemQuantity())
+                if (InventoryBL.CheckItemInInventory(inventoryItem) && InventoryBL.CheckItemQuantity(itemQuantity))
                 {
-                    InventoryBL.UpdateInventory(Actions.UpdateQuantity, inventoryItem);
+                    InventoryBL.UpdateQuantity(inventoryItem, itemQuantity);
                     Console.WriteLine($"\n'{inventoryItem}' quantity updated.");
                 }
                 else
@@ -233,11 +244,11 @@ namespace StoreTrackerSystem
                 Console.Write("Input item name: ");
                 inventoryItem = Console.ReadLine().Trim();
                 Console.Write("Input new item price: ");
-                InventoryBL.itemPrice = Convert.ToDouble(Console.ReadLine());
+                itemPrice = Convert.ToDouble(Console.ReadLine());
 
-                if (InventoryBL.CheckItemInInventory(inventoryItem) && InventoryBL.CheckItemQuantity())
+                if (InventoryBL.CheckItemInInventory(inventoryItem))
                 {
-                    InventoryBL.UpdateInventory(Actions.UpdatePrice, inventoryItem);
+                    InventoryBL.UpdatePrice(inventoryItem, itemPrice);
                     Console.WriteLine($"\n'{inventoryItem}' price updated.");
                 }
                 else
