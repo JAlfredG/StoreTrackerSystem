@@ -41,7 +41,7 @@ namespace STSBusinessDataLogic
 
             return false;
         }
-        public static void AddItem(string itemName, double itemPrice, int itemQuantity)
+        public static bool AddItem(string itemName, double itemPrice, int itemQuantity)
         {
             var item = new ItemInventory
             {
@@ -51,23 +51,22 @@ namespace STSBusinessDataLogic
             };
 
             inventoryData.AddItem(item);
+            return true;
         }
-
-        public static void RemoveItem(string itemName)
+            
+        public static bool RemoveItem(string itemName)
         {
-            var item = new ItemInventory
+            
+            var item = new ItemInventory 
             {
                 ItemName = itemName
             };
-            CheckItemInInventory(itemName);
-            if (CheckItemInInventory(itemName))
-            {
-                inventoryData.RemoveItem(item);
-            }
-
+            inventoryData.RemoveItem(item);
+            return true;
+            
         }
 
-        public static void UpdateQuantity(string itemName, int itemQuantity)
+        public static bool UpdateQuantity(string itemName, int itemQuantity)
         {
             var items = inventoryData.GetInventory();
 
@@ -77,11 +76,13 @@ namespace STSBusinessDataLogic
                 {
                     item.ItemQuantity = itemQuantity;
                     inventoryData.UpdateItemQuantity(item);
+                    return true;
                 }
             }
+            return false;
         }
 
-        public static void UpdatePrice(string itemName, double itemPrice)
+        public static bool UpdatePrice(string itemName, double itemPrice)
         {
             var items = inventoryData.GetInventory();
 
@@ -91,8 +92,10 @@ namespace STSBusinessDataLogic
                 {
                     item.ItemPrice = itemPrice;
                     inventoryData.UpdateItemPrice(item);
+                    return true;
                 }
             }
+            return false;
         }
     }
 }
