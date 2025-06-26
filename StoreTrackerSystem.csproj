@@ -11,14 +11,17 @@
     <Compile Remove="STSBusinessDataLogic\**" />
     <Compile Remove="STSCommon\**" />
     <Compile Remove="STSDataService\**" />
+    <Compile Remove="STSDesktop\**" />
     <Compile Remove="STSUserInterface\**" />
     <EmbeddedResource Remove="STSBusinessDataLogic\**" />
     <EmbeddedResource Remove="STSCommon\**" />
     <EmbeddedResource Remove="STSDataService\**" />
+    <EmbeddedResource Remove="STSDesktop\**" />
     <EmbeddedResource Remove="STSUserInterface\**" />
     <None Remove="STSBusinessDataLogic\**" />
     <None Remove="STSCommon\**" />
     <None Remove="STSDataService\**" />
+    <None Remove="STSDesktop\**" />
     <None Remove="STSUserInterface\**" />
   </ItemGroup>
 
