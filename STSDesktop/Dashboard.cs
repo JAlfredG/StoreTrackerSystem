@@ -64,7 +64,7 @@ namespace STSDesktop
                 SalesReportBL.CalculateProfitDifference();
                 SalesReportBL.CalculateProfitPercentage();
 
-                rtbMainInterface.Text = "Last Daily Report:\n\n";
+                rtbMainInterface.Text = "Sales Report:\n\n";
                 rtbMainInterface.AppendText($"Initial Profit     : {SalesReportBL.initialProfit}\n");
                 rtbMainInterface.AppendText($"Today's Profit     : {SalesReportBL.newProfit}\n");
                 rtbMainInterface.AppendText($"Profit Difference  : {SalesReportBL.difference}\n");
@@ -93,7 +93,12 @@ namespace STSDesktop
 
         private void btnCreateSalesReport_Click(object sender, EventArgs e)
         {
+            CreateSalesReport salesReport = new CreateSalesReport();
 
+            salesReport.FormClosed += (s, args) => this.Show();
+
+            salesReport.Show();
+            this.Hide();
         }
     }
 }
