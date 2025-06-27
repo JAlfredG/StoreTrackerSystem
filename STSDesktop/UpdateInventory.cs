@@ -25,7 +25,32 @@ namespace STSDesktop
 
         private void btnRemoveItem_Click(object sender, EventArgs e)
         {
+            string itemName = txbItemName.Text.Trim();
 
+            if (InventoryBL.CheckInventory())
+            {
+                if (txbItemQuantity.Text == "" && txbItemPrice.Text == "")
+                {
+                    if (InventoryBL.CheckItemInInventory(itemName))
+                    {
+                        InventoryBL.RemoveItem(itemName);
+                        MessageBox.Show($"'{itemName}' removed from inventory.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txbItemName.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item not found.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Item quantity and item price fields must be empty.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Inventory is empty.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnUpdateQuantity_Click(object sender, EventArgs e)
