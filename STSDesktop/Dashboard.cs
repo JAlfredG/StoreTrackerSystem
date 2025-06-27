@@ -23,11 +23,6 @@ namespace STSDesktop
             this.Close();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnShowInventory_Click(object sender, EventArgs e)
         {
             if (InventoryBL.CheckInventory())
@@ -48,7 +43,37 @@ namespace STSDesktop
             {
                 rtbMainInterface.Text = "Inventory is Empty.";
             }
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (DailyReportBL.CheckDailyReport())
+            {
+                rtbMainInterface.Text = $"Last Daily Report:\n\n {DailyReportBL.dailyReport}";
 
+            }
+            else
+            {
+                rtbMainInterface.Text = "No current Report.";
+            }
+        }
+
+        private void btnShowSalesReport_Click(object sender, EventArgs e)
+        {
+            if (!SalesReportBL.IsInitialProfitUnset())
+            {
+                SalesReportBL.CalculateProfitDifference();
+                SalesReportBL.CalculateProfitPercentage();
+
+                rtbMainInterface.Text = "Last Daily Report:\n\n";
+                rtbMainInterface.AppendText($"Initial Profit     : {SalesReportBL.initialProfit}\n");
+                rtbMainInterface.AppendText($"Today's Profit     : {SalesReportBL.newProfit}\n");
+                rtbMainInterface.AppendText($"Profit Difference  : {SalesReportBL.difference}\n");
+                rtbMainInterface.AppendText($"Profit Percentage  : {SalesReportBL.percentage:F2}%\n");
+            }
+            else
+            {
+                rtbMainInterface.Text = "No current Report.";
+            }
         }
     }
 }

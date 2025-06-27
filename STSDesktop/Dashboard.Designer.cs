@@ -93,6 +93,7 @@
             btnShowSalesReport.TabIndex = 4;
             btnShowSalesReport.Text = "Show Sales Report";
             btnShowSalesReport.UseVisualStyleBackColor = true;
+            btnShowSalesReport.Click += btnShowSalesReport_Click;
             // 
             // btnCreateSalesReport
             // 
