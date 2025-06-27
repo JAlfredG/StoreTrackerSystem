@@ -16,14 +16,6 @@ namespace StoreTrackerSystem
 
             Console.WriteLine("Welcome to Store Tracker!");
 
-            var accounts = accountService.GetStoreAccounts();
-
-            foreach (var account in accounts)
-            {
-                Console.WriteLine(account.UserName);
-                Console.WriteLine(account.Password);
-            }
-
             //log in frame
             do
             {
