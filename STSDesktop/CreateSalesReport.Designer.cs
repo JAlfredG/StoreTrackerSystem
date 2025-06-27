@@ -28,22 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblDashboard = new Label();
+            lblTitle = new Label();
             txbProfit = new TextBox();
             btnSubmit = new Button();
             btnCancel = new Button();
             lblProfit = new Label();
             SuspendLayout();
             // 
-            // lblDashboard
+            // lblTitle
             // 
-            lblDashboard.AutoSize = true;
-            lblDashboard.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDashboard.Location = new Point(12, 22);
-            lblDashboard.Name = "lblDashboard";
-            lblDashboard.Size = new Size(180, 38);
-            lblDashboard.TabIndex = 2;
-            lblDashboard.Text = "Sales Report";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.Location = new Point(12, 22);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(180, 38);
+            lblTitle.TabIndex = 2;
+            lblTitle.Text = "Sales Report";
             // 
             // txbProfit
             // 
@@ -97,7 +97,7 @@
             Controls.Add(btnCancel);
             Controls.Add(btnSubmit);
             Controls.Add(txbProfit);
-            Controls.Add(lblDashboard);
+            Controls.Add(lblTitle);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "CreateSalesReport";
@@ -110,7 +110,7 @@
 
         #endregion
 
-        private Label lblDashboard;
+        private Label lblTitle;
         private TextBox txbProfit;
         private Button btnSubmit;
         private Button btnCancel;

@@ -78,7 +78,12 @@ namespace STSDesktop
 
         private void btnUpdateInventory_Click(object sender, EventArgs e)
         {
+            UpdateInventory updateInventory = new UpdateInventory();
 
+            updateInventory.FormClosed += (s, args) => this.Show();
+
+            updateInventory.Show();
+            this.Hide();
         }
 
         private void btnCreateDailyReport_Click(object sender, EventArgs e)

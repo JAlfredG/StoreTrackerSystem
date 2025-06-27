@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            lblDashboard = new Label();
+            lblTitle = new Label();
             rtxbDailyReport = new RichTextBox();
             btnSubmit = new Button();
             btnCancel = new Button();
             SuspendLayout();
             // 
-            // lblDashboard
+            // lblTitle
             // 
-            lblDashboard.AutoSize = true;
-            lblDashboard.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            lblDashboard.Location = new Point(12, 22);
-            lblDashboard.Name = "lblDashboard";
-            lblDashboard.Size = new Size(181, 38);
-            lblDashboard.TabIndex = 2;
-            lblDashboard.Text = "Daily Report";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.Location = new Point(12, 22);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(181, 38);
+            lblTitle.TabIndex = 2;
+            lblTitle.Text = "Daily Report";
             // 
             // rtxbDailyReport
             // 
@@ -87,7 +87,7 @@
             Controls.Add(btnCancel);
             Controls.Add(btnSubmit);
             Controls.Add(rtxbDailyReport);
-            Controls.Add(lblDashboard);
+            Controls.Add(lblTitle);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             Name = "CreateDailyReport";
@@ -99,7 +99,7 @@
 
         #endregion
 
-        private Label lblDashboard;
+        private Label lblTitle;
         private RichTextBox rtxbDailyReport;
         private Button btnSubmit;
         private Button btnCancel;
