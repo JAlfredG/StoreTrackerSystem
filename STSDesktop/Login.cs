@@ -21,8 +21,8 @@ namespace STSDesktop
 
                 if (accountService.LogInAttempts())
                 {
-                    txbUsername.Text = "";
-                    txbPassword.Text = "";
+                    txbUsername.Clear();
+                    txbPassword.Clear();
 
                     MessageBox.Show("Too many failed attempts. Please try again later.", "Locked Out", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     btnLogin.Visible = false;
@@ -39,7 +39,7 @@ namespace STSDesktop
             dashboard.FormClosed += (s, args) => this.Show(); 
             dashboard.Show();
             this.Hide();
-            txbPassword.Text = "";
+            txbPassword.Clear();
 
         }
 

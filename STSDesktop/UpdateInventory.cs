@@ -32,9 +32,9 @@ namespace STSDesktop
                     {
                         InventoryBL.AddItem(itemName, itemQuantity, (int)itemPrice);
                         MessageBox.Show($"'{itemName}' added to the inventory.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        txbItemName.Text = "";
-                        txbItemQuantity.Text = "";
-                        txbItemPrice.Text = "";
+                        txbItemName.Clear();
+                        txbItemQuantity.Clear();
+                        txbItemPrice.Clear();
                     }
                     else
                     {
@@ -45,7 +45,7 @@ namespace STSDesktop
                 {
                     MessageBox.Show("Item already exist in the inventory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                
+                 
             } catch
             {
                 MessageBox.Show("Invalid Inputs. All fields must be filled.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -74,7 +74,7 @@ namespace STSDesktop
                 }
                 else
                 {
-                    MessageBox.Show("Item quantity and item price fields must be empty.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Only item name must be filled.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
@@ -85,12 +85,75 @@ namespace STSDesktop
 
         private void btnUpdateQuantity_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string itemName = txbItemName.Text.Trim();
+                int itemQuantity = int.Parse(txbItemQuantity.Text);
 
+                if(txbItemPrice.Text == "")
+                {
+                    if (InventoryBL.CheckItemInInventory(itemName))
+                    {
+                        if (InventoryBL.CheckItemQuantity(itemQuantity))
+                        {
+                            InventoryBL.UpdateQuantity(itemName, itemQuantity);
+                            MessageBox.Show($"'{itemName}' quantity updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            txbItemName.Clear();
+                            txbItemQuantity.Clear();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid item quantity.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item does not exist in the inventory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Only item name and item quantity fields must be filled.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Invalid Inputs.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnUpdatePrice_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string itemName = txbItemName.Text.Trim();
+                double itemPrice = double.Parse(txbItemPrice.Text);
 
+                if (txbItemQuantity.Text == "")
+                {
+                    if (InventoryBL.CheckItemInInventory(itemName))
+                    {
+                        InventoryBL.UpdatePrice(itemName, itemPrice);
+                        MessageBox.Show($"'{itemName}' price updated.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txbItemName.Clear();
+                        txbItemPrice.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Item does not exist in the inventory.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Only item name and item price fields must be filled.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+            }
+            catch
+            {
+                MessageBox.Show("Invalid Inputs.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
