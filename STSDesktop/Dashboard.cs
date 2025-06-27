@@ -48,7 +48,7 @@ namespace STSDesktop
         {
             if (DailyReportBL.CheckDailyReport())
             {
-                rtbMainInterface.Text = $"Last Daily Report:\n\n {DailyReportBL.dailyReport}";
+                rtbMainInterface.Text = $"Daily Report:\n\n {DailyReportBL.dailyReport}";
 
             }
             else
@@ -74,6 +74,26 @@ namespace STSDesktop
             {
                 rtbMainInterface.Text = "No current Report.";
             }
+        }
+
+        private void btnUpdateInventory_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnCreateDailyReport_Click(object sender, EventArgs e)
+        {
+            CreateDailyReport dailyReport = new CreateDailyReport();
+
+            dailyReport.FormClosed += (s, args) => this.Show();
+
+            dailyReport.Show();
+            this.Hide();
+        }
+
+        private void btnCreateSalesReport_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

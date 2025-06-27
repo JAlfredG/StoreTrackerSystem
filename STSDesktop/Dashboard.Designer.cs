@@ -104,6 +104,7 @@
             btnCreateSalesReport.TabIndex = 7;
             btnCreateSalesReport.Text = "Create Sales Report";
             btnCreateSalesReport.UseVisualStyleBackColor = true;
+            btnCreateSalesReport.Click += btnCreateSalesReport_Click;
             // 
             // btnCreateDailyReport
             // 
@@ -114,6 +115,7 @@
             btnCreateDailyReport.TabIndex = 6;
             btnCreateDailyReport.Text = "Create Daily Report";
             btnCreateDailyReport.UseVisualStyleBackColor = true;
+            btnCreateDailyReport.Click += btnCreateDailyReport_Click;
             // 
             // btnUpdateInventory
             // 
@@ -124,6 +126,7 @@
             btnUpdateInventory.TabIndex = 5;
             btnUpdateInventory.Text = "Update Inventory";
             btnUpdateInventory.UseVisualStyleBackColor = true;
+            btnUpdateInventory.Click += btnUpdateInventory_Click;
             // 
             // btnLogout
             // 
