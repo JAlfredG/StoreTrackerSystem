@@ -21,18 +21,25 @@ namespace STSDesktop
 
                 if (accountService.LogInAttempts())
                 {
+                    txbUsername.Text = "";
+                    txbPassword.Text = "";
+
                     MessageBox.Show("Too many failed attempts. Please try again later.", "Locked Out", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    btnLogin.Enabled = false;
+                    btnLogin.Visible = false;
+
+                    System.Threading.Thread.Sleep(3000);
+
+                    btnLogin.Visible = true;
                 }
                 return;
             }
 
-            MessageBox.Show("Login successful!", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            Dashboard dashboardForm = new Dashboard();
-            dashboardForm.FormClosed += (s, args) => this.Show(); 
-            dashboardForm.Show();
+            Dashboard dashboard = new Dashboard();
+            dashboard.FormClosed += (s, args) => this.Show(); 
+            dashboard.Show();
             this.Hide();
+            txbPassword.Text = "";
 
         }
 

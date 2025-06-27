@@ -30,12 +30,12 @@
         {
             rtbMainInterface = new RichTextBox();
             lblDashboard = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
+            btnShowInventory = new Button();
+            btnShowDailyReport = new Button();
+            btnShowSalesReport = new Button();
+            btnCreateSalesReport = new Button();
+            btnCreateDailyReport = new Button();
+            btnUpdateInventory = new Button();
             btnLogout = new Button();
             SuspendLayout();
             // 
@@ -62,65 +62,67 @@
             lblDashboard.TabIndex = 1;
             lblDashboard.Text = "Dashboard";
             // 
-            // button1
+            // btnShowInventory
             // 
-            button1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.Location = new Point(675, 86);
-            button1.Name = "button1";
-            button1.Size = new Size(237, 69);
-            button1.TabIndex = 2;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
+            btnShowInventory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnShowInventory.Location = new Point(675, 86);
+            btnShowInventory.Name = "btnShowInventory";
+            btnShowInventory.Size = new Size(237, 69);
+            btnShowInventory.TabIndex = 2;
+            btnShowInventory.Text = "Show Inventory";
+            btnShowInventory.UseVisualStyleBackColor = true;
+            btnShowInventory.Click += btnShowInventory_Click;
             // 
-            // button2
+            // btnShowDailyReport
             // 
-            button2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.Location = new Point(675, 161);
-            button2.Name = "button2";
-            button2.Size = new Size(237, 69);
-            button2.TabIndex = 3;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
+            btnShowDailyReport.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnShowDailyReport.Location = new Point(675, 161);
+            btnShowDailyReport.Name = "btnShowDailyReport";
+            btnShowDailyReport.Size = new Size(237, 69);
+            btnShowDailyReport.TabIndex = 3;
+            btnShowDailyReport.Text = "Show Daily Report";
+            btnShowDailyReport.UseVisualStyleBackColor = true;
+            btnShowDailyReport.Click += button2_Click;
             // 
-            // button3
+            // btnShowSalesReport
             // 
-            button3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.Location = new Point(675, 236);
-            button3.Name = "button3";
-            button3.Size = new Size(237, 69);
-            button3.TabIndex = 4;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
+            btnShowSalesReport.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnShowSalesReport.Location = new Point(675, 236);
+            btnShowSalesReport.Name = "btnShowSalesReport";
+            btnShowSalesReport.Size = new Size(237, 69);
+            btnShowSalesReport.TabIndex = 4;
+            btnShowSalesReport.Text = "Show Sales Report";
+            btnShowSalesReport.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnCreateSalesReport
             // 
-            button4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.Location = new Point(675, 461);
-            button4.Name = "button4";
-            button4.Size = new Size(237, 69);
-            button4.TabIndex = 7;
-            button4.Text = "button4";
-            button4.UseVisualStyleBackColor = true;
+            btnCreateSalesReport.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCreateSalesReport.Location = new Point(675, 461);
+            btnCreateSalesReport.Name = "btnCreateSalesReport";
+            btnCreateSalesReport.Size = new Size(237, 69);
+            btnCreateSalesReport.TabIndex = 7;
+            btnCreateSalesReport.Text = "Create Sales Report";
+            btnCreateSalesReport.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btnCreateDailyReport
             // 
-            button5.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button5.Location = new Point(675, 386);
-            button5.Name = "button5";
-            button5.Size = new Size(237, 69);
-            button5.TabIndex = 6;
-            button5.Text = "button5";
-            button5.UseVisualStyleBackColor = true;
+            btnCreateDailyReport.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnCreateDailyReport.Location = new Point(675, 386);
+            btnCreateDailyReport.Name = "btnCreateDailyReport";
+            btnCreateDailyReport.Size = new Size(237, 69);
+            btnCreateDailyReport.TabIndex = 6;
+            btnCreateDailyReport.Text = "Create Daily Report";
+            btnCreateDailyReport.UseVisualStyleBackColor = true;
             // 
-            // button6
+            // btnUpdateInventory
             // 
-            button6.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button6.Location = new Point(675, 311);
-            button6.Name = "button6";
-            button6.Size = new Size(237, 69);
-            button6.TabIndex = 5;
-            button6.Text = "button6";
-            button6.UseVisualStyleBackColor = true;
+            btnUpdateInventory.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnUpdateInventory.Location = new Point(675, 311);
+            btnUpdateInventory.Name = "btnUpdateInventory";
+            btnUpdateInventory.Size = new Size(237, 69);
+            btnUpdateInventory.TabIndex = 5;
+            btnUpdateInventory.Text = "Update Inventory";
+            btnUpdateInventory.UseVisualStyleBackColor = true;
             // 
             // btnLogout
             // 
@@ -141,12 +143,12 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(924, 633);
             Controls.Add(btnLogout);
-            Controls.Add(button4);
-            Controls.Add(button5);
-            Controls.Add(button6);
-            Controls.Add(button3);
-            Controls.Add(button2);
-            Controls.Add(button1);
+            Controls.Add(btnCreateSalesReport);
+            Controls.Add(btnCreateDailyReport);
+            Controls.Add(btnUpdateInventory);
+            Controls.Add(btnShowSalesReport);
+            Controls.Add(btnShowDailyReport);
+            Controls.Add(btnShowInventory);
             Controls.Add(lblDashboard);
             Controls.Add(rtbMainInterface);
             MaximizeBox = false;
@@ -161,12 +163,12 @@
 
         private RichTextBox rtbMainInterface;
         private Label lblDashboard;
-        private Button button1;
-        private Button button2;
-        private Button button3;
-        private Button button4;
-        private Button button5;
-        private Button button6;
+        private Button btnShowInventory;
+        private Button btnShowDailyReport;
+        private Button btnShowSalesReport;
+        private Button btnCreateSalesReport;
+        private Button btnCreateDailyReport;
+        private Button btnUpdateInventory;
         private Button btnLogout;
     }
 }
